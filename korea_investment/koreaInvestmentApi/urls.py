@@ -1,8 +1,7 @@
 from django.urls import path
-from koreaInvestmentApi.views import views
+from koreaInvestmentApi.Views import Views
 
 urlpatterns = [
-    # path("v1/quotes/domestic-stocks/", views.getDomesticStocksPrice, name="koreaInvestmentApi"),
-    path("v1/trading/domestic-stocks/", views.domesticStocksTrading, name="koreaInvestmentApi"),
-    path("v1/trading/overseas-stocks/", views.overseasStocksTrading, name="koreaInvestmentApi"),
+    path("v1/trading/domestic/auto-trading/", Views.autoTradingDomesticStocks, name="koreaInvestmentApi"),
+    path("v1/trading/overseas/auto-trading/", Views.autoTradingOverseasStocks, name="koreaInvestmentApi")
 ]
