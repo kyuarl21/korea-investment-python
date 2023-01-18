@@ -1,7 +1,10 @@
 import json
+import logging
 import requests
 import yaml
 from koreaInvestmentApi.Headers import Headers
+from koreaInvestmentApi.LoggingHandler import LoggingHandler
+logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:
     _cfg = yaml.load(f, Loader=yaml.FullLoader)
@@ -30,11 +33,12 @@ class Trading:
             "ORD_UNPR": "0"
         }
         response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "VTTC0802U"), data=json.dumps(body))
-        #print(response.json())
-        if response.json()['rt_cd'] == '0':
-            (f"[매수 성공]{str(response.json())}")
-        else:
-            (f"[매수 실패]{str(response.json())}")
+        logger.debug(response.json())
+        return response.json()
+#        if response.json()['rt_cd'] == '0':
+#            (f"[매수 성공]{str(response.json())}")
+#        else:
+#            (f"[매수 실패]{str(response.json())}")
         
     def getDomesticAvailableBalance(self, token, symbol):
         """ 국내주식 매수가능 조회 """
@@ -49,9 +53,9 @@ class Trading:
             "OVRS_ICLD_YN": "Y"
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "VTTC8908R"), params = params)
-        #print(response.json())
-        cash = response.json()['output']['ord_psbl_cash']
-        return cash
+        logger.debug(response.json())
+        #cash = response.json()['output']['ord_psbl_cash']
+        return response.json()
     
     def orderDomesticStock(self, token, trId, excg, pdno, quantity):
         """ 해외주식 주문 """
@@ -105,11 +109,12 @@ class Trading:
             "ORD_DVSN": ""
         }
         response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, trId), data=json.dumps(body))
-        #print(response.json())
-        if response.json()['rt_cd'] == '0':
-            (f"[매수 성공]{str(response.json())}")
-        else:
-            (f"[매수 실패]{str(response.json())}")
+        logger.debug(response.json())
+        return response.json()
+#        if response.json()['rt_cd'] == '0':
+#            (f"[매수 성공]{str(response.json())}")
+#        else:
+#            (f"[매수 실패]{str(response.json())}")
     
     def orderDomesticStock(self, token, trId, excg, unpr, item):
         """ 해외주식 매수가능 조회 모의투자 미지원 """
@@ -129,5 +134,5 @@ class Trading:
             "ITEM_CD": item
         }
         response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, trId), data=json.dumps(body))
-        print(response.json())
+        logger.debug(response.json())
         return response.json()

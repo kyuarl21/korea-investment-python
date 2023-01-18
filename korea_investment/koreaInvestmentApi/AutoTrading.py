@@ -23,15 +23,18 @@ class AutoTrading:
         
     def autoTradingDomesticStocks(self):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
+        response_array = []
         symbol_list = ["005930", "035420", "035720"]
-        for symbol in symbol_list:
-            present_price = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, symbol)
-            print(present_price)
-            time.sleep(1)
-            daily_price = Quotes.getDomesticStockDailyPrices(self, ACCESS_TOKEN, symbol)
-            print(daily_price)
+        #for symbol in symbol_list:
+        #    price_response = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, symbol)
+        #    time.sleep(1)
+        #    daily_price = Quotes.getDomesticStockDailyPrices(self, ACCESS_TOKEN, symbol)
         
-        return "Hello"
+        response = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, "005930")
+        time.sleep(1)
+        daily_response = Quotes.getDomesticStockDailyPrices(self, ACCESS_TOKEN, "005930")
+        
+        return daily_response
     
     def autoTradingOverseasStocks(self):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()

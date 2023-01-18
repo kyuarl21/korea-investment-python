@@ -2,6 +2,8 @@ import json
 import requests
 import yaml
 from koreaInvestmentApi.Headers import Headers
+from koreaInvestmentApi.LoggingHandler import LoggingHandler
+logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:
     _cfg = yaml.load(f, Loader=yaml.FullLoader)
@@ -26,8 +28,9 @@ class Quotes:
             "FID_INPUT_ISCD": symbol
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "FHKST01010100"), params = params)
-        #print(response.json())
-        return int(response.json()['output']['stck_prpr'])
+        logger.debug(response.json())
+        #return int(response.json()['output']['stck_prpr'])
+        return response.json()
     
     def getOverseasStockPrice(self, token, excd, symb):
         """ 해외주식 현재가 조회 """
@@ -38,7 +41,6 @@ class Quotes:
             "SYMB": symb
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS00000300"), params = params)
-        #print(response.json())
         return response.json()['output']['last']
     
     def getDomesticStockDailyPrices(self, token, symbol):
@@ -51,7 +53,7 @@ class Quotes:
             "FID_ORG_ADJ_PRC": "0"
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "FHKST01010400"), params = params)
-        #print(response.json())
+        logger.debug(response.json())
         return response.json()
     
     def getOverseasStockDailyPrices(self, token, excd, symb):
@@ -67,7 +69,7 @@ class Quotes:
             "KEYB": ""
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS76240000"), params = params)
-        #print(response.json())
+        logger.debug(response.json())
         return response.json()
     
     def getDomesticStockDailyPricesByIndustry(self, token):
@@ -81,5 +83,5 @@ class Quotes:
             "FID_PERIOD_DIV_CODE": "D"
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS76240000"), params = params)
-        print(response.json())
+        logger.debug(response.json())
         return response.json()
