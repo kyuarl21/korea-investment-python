@@ -21,7 +21,7 @@ class Trading:
         self.symbol = symbol
         self.quantity = quantity
         
-    def orderDomesticStock(self, token, symbol, quantity):
+    def orderDomesticStock(self, token, trId, symbol, quantity):
         """ 국내주식 주문 """
         url = KOREA_INVESTMENT_BASE_URL + "/uapi/domestic-stock/v1/trading/order-cash"
         body = {
@@ -32,7 +32,7 @@ class Trading:
             "ORD_QTY": str(quantity),
             "ORD_UNPR": "0"
         }
-        response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "VTTC0802U"), data=json.dumps(body))
+        response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, trId), data=json.dumps(body))
         logger.debug(response.json())
         return response.json()
 #        if response.json()['rt_cd'] == '0':
@@ -57,7 +57,7 @@ class Trading:
         #cash = response.json()['output']['ord_psbl_cash']
         return response.json()
     
-    def orderDomesticStock(self, token, trId, excg, pdno, quantity):
+    def orderOverseasStock(self, token, trId, excg, pdno, quantity):
         """ 해외주식 주문 """
         """[실전투자]
             JTTT1002U : 미국 매수 주문
@@ -116,7 +116,7 @@ class Trading:
 #        else:
 #            (f"[매수 실패]{str(response.json())}")
     
-    def orderDomesticStock(self, token, trId, excg, unpr, item):
+    def getOverseasAvailableBalance(self, token, trId, excg, unpr, item):
         """ 해외주식 매수가능 조회 모의투자 미지원 """
         """※ PSBL_YN(주야간 원장 구분) 값으로 tr_id 구분해서 API 호출
             - 해외주식주문 > 해외주식 주야간원장구분조회 API문서 참조

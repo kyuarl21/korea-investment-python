@@ -32,17 +32,6 @@ class Quotes:
         #return int(response.json()['output']['stck_prpr'])
         return response.json()
     
-    def getOverseasStockPrice(self, token, excd, symb):
-        """ 해외주식 현재가 조회 """
-        url = KOREA_INVESTMENT_BASE_URL + "/uapi/overseas-price/v1/quotations/price"
-        params = {
-            "AUTH": "",
-            "EXCD": excd,
-            "SYMB": symb
-        }
-        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS00000300"), params = params)
-        return response.json()['output']['last']
-    
     def getDomesticStockDailyPrices(self, token, symbol):
         """ 국내주식 일자별 시세 조회 """
         url = KOREA_INVESTMENT_BASE_URL + "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
@@ -53,6 +42,32 @@ class Quotes:
             "FID_ORG_ADJ_PRC": "0"
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "FHKST01010400"), params = params)
+        logger.debug(response.json())
+        return response.json()
+    
+    def getDomesticStockDailyPricesByIndustry(self, token):
+        """ 국내주식 업종별 시세 조회 """
+        url = KOREA_INVESTMENT_BASE_URL + "/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice"
+        params = {
+            "FID_COND_MRKT_DIV_CODE": "U",
+            "FID_INPUT_ISCD": "0002",
+            "FID_INPUT_DATE_1": "20230101",
+            "FID_INPUT_DATE_2": "20230116",
+            "FID_PERIOD_DIV_CODE": "D"
+        }
+        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS76240000"), params = params)
+        logger.debug(response.json())
+        return response.json()
+    
+    def getOverseasStockPrice(self, token, excd, symb):
+        """ 해외주식 현재가 조회 """
+        url = KOREA_INVESTMENT_BASE_URL + "/uapi/overseas-price/v1/quotations/price"
+        params = {
+            "AUTH": "",
+            "EXCD": excd,
+            "SYMB": symb
+        }
+        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS00000300"), params = params)
         logger.debug(response.json())
         return response.json()
     
@@ -67,20 +82,6 @@ class Quotes:
             "BYMD": "",
             "MODP": "1",
             "KEYB": ""
-        }
-        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS76240000"), params = params)
-        logger.debug(response.json())
-        return response.json()
-    
-    def getDomesticStockDailyPricesByIndustry(self, token):
-        """ 국내주식 업종별 시세 조회 """
-        url = KOREA_INVESTMENT_BASE_URL + "/uapi/domestic-stock/v1/quotations/inquire-daily-indexchartprice"
-        params = {
-            "FID_COND_MRKT_DIV_CODE": "U",
-            "FID_INPUT_ISCD": "0002",
-            "FID_INPUT_DATE_1": "20230101",
-            "FID_INPUT_DATE_2": "20230116",
-            "FID_PERIOD_DIV_CODE": "D"
         }
         response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "HHDFS76240000"), params = params)
         logger.debug(response.json())

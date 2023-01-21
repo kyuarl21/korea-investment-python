@@ -18,9 +18,9 @@ class LoggingHandler:
         
         #4 handler instance 생성하여 console 및 파일로 저장할 수 있도록 합니다. 파일명은 txt도 됩니다.
         console = logging.StreamHandler()
-        file_handler_debug = logging.FileHandler(filename="debug.log")
-        file_handler_info = logging.FileHandler(filename="info.log")
-        file_handler_error = logging.FileHandler(filename="error.log")
+        file_handler_debug = logging.FileHandler(filename="logs/debug.log")
+        file_handler_info = logging.FileHandler(filename="logs/info.log")
+        file_handler_error = logging.FileHandler(filename="logs/error.log")
         
         #5 handler 별로 다른 level 설정합니다. 설정한 level 이하 모두 출력,저장됩니다.
         console.setLevel(logging.WARN)

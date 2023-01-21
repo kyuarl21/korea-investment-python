@@ -8,7 +8,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from koreaInvestmentApi.AutoTrading import AutoTrading
-
 class Views:
     def __init__(self):
         self = self
