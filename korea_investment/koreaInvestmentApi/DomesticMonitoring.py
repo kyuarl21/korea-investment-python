@@ -4,6 +4,7 @@ import requests
 import time
 import yaml
 from koreaInvestmentApi.Crawlings import Crawlings
+from koreaInvestmentApi.Holdings import Holdings
 from koreaInvestmentApi.Quotes import Quotes
 from koreaInvestmentApi.TokenManagement import TokenManagement
 from koreaInvestmentApi.Trading import Trading
@@ -26,6 +27,7 @@ class DomesticMonitoring:
         
     def monitoringKospiStocks(self, kospiSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
+        stocks_balance = Holdings.getDomesticStocksBalance(self, ACCESS_TOKEN)
         response_array = []
         for symbol in kospiSymbols:
             #present_response = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, symbol)
@@ -59,9 +61,11 @@ class DomesticMonitoring:
             if (float(target) <= float(30)):
                 order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0802U", symbol, quantity)
                 order_response['output']['symbol'] = symbol
-            #elif (float(target) >= float(70)):
-            #    order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0801U", symbol, quantity)
-            #    order_response['output']['symbol'] = symbol
+            elif (float(target) >= float(70)):
+                for holdings in stocks_balance['output1']:
+                    if (str(holdings['pdno']) == str(symbol)):
+                        order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0801U", holdings['pdno'], holdings['ord_psbl_qty'])
+                        order_response['output']['symbol'] = symbol
             
             response_array.append(order_response)
         
@@ -70,6 +74,7 @@ class DomesticMonitoring:
     
     def monitoringKosdaqStocks(self, kosdaqSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
+        stocks_balance = Holdings.getDomesticStocksBalance(self, ACCESS_TOKEN)
         response_array = []
         for symbol in kosdaqSymbols:
             #present_response = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, symbol)
@@ -103,9 +108,11 @@ class DomesticMonitoring:
             if (float(target) <= float(30)):
                 order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0802U", symbol, quantity)
                 order_response['output']['symbol'] = symbol
-            #elif (float(target) >= float(70)):
-            #    order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0801U", symbol, quantity)
-            #    order_response['output']['symbol'] = symbol
+            elif (float(target) >= float(70)):
+                for holdings in stocks_balance['output1']:
+                    if (str(holdings['pdno']) == str(symbol)):
+                        order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0801U", holdings['pdno'], holdings['ord_psbl_qty'])
+                        order_response['output']['symbol'] = symbol
             
             response_array.append(order_response)
         
