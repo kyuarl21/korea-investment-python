@@ -1,5 +1,4 @@
 import json
-import logging
 import requests
 import yaml
 from koreaInvestmentApi.Headers import Headers

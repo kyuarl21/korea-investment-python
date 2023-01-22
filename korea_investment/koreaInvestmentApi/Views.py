@@ -7,17 +7,35 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from koreaInvestmentApi.AutoTrading import AutoTrading
+from koreaInvestmentApi.DomesticMonitoring import DomesticMonitoring
+from koreaInvestmentApi.OverseasMonitoring import OverseasMonitoring
+from koreaInvestmentApi.SymbolsCreator import SymbolsCreator
+
 class Views:
     def __init__(self):
         self = self
     
     @api_view(['GET'])
-    def autoTradingDomesticStocks(self):
-        response = AutoTrading.autoTradingDomesticStocks(self)
+    def monitoringKospiStocks(self):
+        response = DomesticMonitoring.monitoringKospiStocks(self, SymbolsCreator.createKospiSymbols())
         return Response(response)
     
     @api_view(['GET'])
-    def autoTradingOverseasStocks(self):
-        response = AutoTrading.autoTradingOverseasStocks(self)
+    def monitoringKosdaqStocks(self):
+        response = DomesticMonitoring.monitoringKosdaqStocks(self, SymbolsCreator.createKosdaqSymbols())
+        return Response(response)
+    
+    @api_view(['GET'])
+    def monitoringNasdaqStocks(self):
+        response = OverseasMonitoring.monitoringNasdaqStocks(self, SymbolsCreator.createNasdaqSymbols())
+        return Response(response)
+    
+    @api_view(['GET'])
+    def monitoringNewYorkStocks(self):
+        response = OverseasMonitoring.monitoringNewYorkStocks(self, SymbolsCreator.createNewYorkSymbols())
+        return Response(response)
+    
+    @api_view(['GET'])
+    def monitoringAmexStocks(self):
+        response = OverseasMonitoring.monitoringAmexStocks(self, SymbolsCreator.createAmexSymbols())
         return Response(response)
