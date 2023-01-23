@@ -10,6 +10,9 @@ with open('config.yaml', encoding='UTF-8') as f:
 KAKAO_BASE_URI = _cfg['KAKAO_BASE_URI']
 
 class PushMessages:
+    def __init__(self, token, text):
+        self.token = token
+        self.text = text
     
     def kakao_push_messages(token, text):
         """ Push kakao messages """

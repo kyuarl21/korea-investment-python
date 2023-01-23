@@ -15,6 +15,8 @@ CANO = _cfg['CANO']
 ACNT_PRDT_CD = _cfg['ACNT_PRDT_CD']
 
 class Holdings:
+    def __init__(self, token):
+        self.token = token
     
     def getDomesticStocksBalance(self, token):
         """ 국내 주식 잔고조회 """

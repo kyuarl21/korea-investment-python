@@ -2,7 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from apscheduler.schedulers.background import BlockingScheduler
 
 def main():
     """Run administrative tasks."""
@@ -16,10 +15,6 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-    
-    #scheduler = BlockingScheduler()
-    #scheduler.add_job(job, 'interval', seconds=3, id='test', args=['hello?'])
-    #scheduler.start()
 
 if __name__ == '__main__':
     main()

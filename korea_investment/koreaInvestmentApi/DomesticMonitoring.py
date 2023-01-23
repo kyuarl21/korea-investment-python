@@ -22,8 +22,6 @@ ACNT_PRDT_CD = _cfg['ACNT_PRDT_CD']
 ACCESS_TOKEN = ""
 
 class DomesticMonitoring:
-    def __init__(self):
-        self = self
         
     def monitoringKospiStocks(self, kospiSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()

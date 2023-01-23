@@ -1,10 +1,4 @@
-import datetime
-import json
-import schedule
-import time
-from apscheduler.schedulers.background import BlockingScheduler
 from django.http import HttpResponse
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from koreaInvestmentApi.DomesticMonitoring import DomesticMonitoring
@@ -12,8 +6,6 @@ from koreaInvestmentApi.OverseasMonitoring import OverseasMonitoring
 from koreaInvestmentApi.SymbolsCreator import SymbolsCreator
 
 class Views:
-    def __init__(self):
-        self = self
     
     @api_view(['GET'])
     def monitoringKospiStocks(self):

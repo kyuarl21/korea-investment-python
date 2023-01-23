@@ -15,8 +15,9 @@ CANO = _cfg['CANO']
 ACNT_PRDT_CD = _cfg['ACNT_PRDT_CD']
 
 class Trading:
-    def __init__(self, token, symbol, quantity):
+    def __init__(self, token, trId, symbol, quantity):
         self.token = token
+        self.trId = trId
         self.symbol = symbol
         self.quantity = quantity
         

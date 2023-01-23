@@ -22,8 +22,6 @@ ACNT_PRDT_CD = _cfg['ACNT_PRDT_CD']
 ACCESS_TOKEN = ""
 
 class OverseasMonitoring:
-    def __init__(self):
-        self = self
     
     def monitoringNasdaqStocks(self, nasdaqSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
