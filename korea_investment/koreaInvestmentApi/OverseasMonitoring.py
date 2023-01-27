@@ -1,14 +1,11 @@
-import datetime
-import json
-import requests
-import time
 import yaml
 from koreaInvestmentApi.Crawlings import Crawlings
 from koreaInvestmentApi.Holdings import Holdings
+from koreaInvestmentApi.LoggingHandler import LoggingHandler
 from koreaInvestmentApi.Quotes import Quotes
 from koreaInvestmentApi.TokenManagement import TokenManagement
 from koreaInvestmentApi.Trading import Trading
-from koreaInvestmentApi.LoggingHandler import LoggingHandler
+
 logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:
@@ -26,6 +23,7 @@ class OverseasMonitoring:
     def monitoringNasdaqStocks(self, nasdaqSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
         stocks_balance = Holdings.getOverseasStocksBalance(self, ACCESS_TOKEN)
+        print(stocks_balance)
         response_array = []
         excd = "NAS"
         excg = "NASD"
@@ -65,11 +63,11 @@ class OverseasMonitoring:
             if (float(target) <= float(30)):
                 order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1002U", excg, symbol, quantity)
                 order_response['output']['symbol'] = symbol
-            elif (float(target) >= float(70)):
-                for holdings in stocks_balance['output1']:
-                    if (str(holdings['ovrs_pdno']) == str(symbol)):
-                        order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
-                        order_response['output']['symbol'] = symbol
+            # elif (float(target) >= float(70)):
+            #     for holdings in stocks_balance['output1']:
+            #         if (str(holdings['ovrs_pdno']) == str(symbol)):
+            #             order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
+            #             order_response['output']['symbol'] = symbol
                 
             response_array.append(order_response)
         
@@ -79,6 +77,7 @@ class OverseasMonitoring:
     def monitoringNewYorkStocks(self, newYorkSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
         stocks_balance = Holdings.getOverseasStocksBalance(self, ACCESS_TOKEN)
+        print(stocks_balance)
         response_array = []
         excd = "NYS"
         excg = "NYSE"
@@ -117,11 +116,11 @@ class OverseasMonitoring:
             if (float(target) <= float(30)):
                 order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1002U", excg, symbol, quantity)
                 order_response['output']['symbol'] = symbol
-            elif (float(target) >= float(70)):
-                for holdings in stocks_balance['output1']:
-                    if (str(holdings['ovrs_pdno']) == str(symbol)):
-                        order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
-                        order_response['output']['symbol'] = symbol
+            # elif (float(target) >= float(70)):
+            #     for holdings in stocks_balance['output1']:
+            #         if (str(holdings['ovrs_pdno']) == str(symbol)):
+            #             order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
+            #             order_response['output']['symbol'] = symbol
                 
             response_array.append(order_response)
         
@@ -131,6 +130,7 @@ class OverseasMonitoring:
     def monitoringAmexStocks(self, amexSymbols):
         ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
         stocks_balance = Holdings.getOverseasStocksBalance(self, ACCESS_TOKEN)
+        print(stocks_balance)
         response_array = []
         excd = "AMS"
         excg = "AMEX"
@@ -169,11 +169,11 @@ class OverseasMonitoring:
             if (float(target) <= float(30)):
                 order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1002U", excg, symbol, quantity)
                 order_response['output']['symbol'] = symbol
-            elif (float(target) >= float(70)):
-                for holdings in stocks_balance['output1']:
-                    if (str(holdings['ovrs_pdno']) == str(symbol)):
-                        order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
-                        order_response['output']['symbol'] = symbol
+            # elif (float(target) >= float(70)):
+            #     for holdings in stocks_balance['output1']:
+            #         if (str(holdings['ovrs_pdno']) == str(symbol)):
+            #             order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", holdings['ovrs_excg_cd'], holdings['ovrs_pdno'], holdings['ord_psbl_qty'])
+            #             order_response['output']['symbol'] = symbol
                 
             response_array.append(order_response)
         

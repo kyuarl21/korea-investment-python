@@ -3,6 +3,7 @@ import requests
 import yaml
 from koreaInvestmentApi.Headers import Headers
 from koreaInvestmentApi.LoggingHandler import LoggingHandler
+
 logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:
@@ -106,7 +107,7 @@ class Trading:
             "OVRS_ORD_UNPR": "0",
             "SLL_TYPE": "", # 제거 : 매수, 00 : 매도
             "ORD_SVR_DVSN_CD": "0",
-            "ORD_DVSN": ""
+            "ORD_DVSN": "00"
         }
         response = requests.post(url, headers = Headers.createKoreaInvestmentHeaders(self, token, trId), data=json.dumps(body))
         logger.debug(response.json())

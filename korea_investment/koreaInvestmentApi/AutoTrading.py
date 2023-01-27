@@ -1,13 +1,10 @@
-import datetime
-import json
-import requests
-import time
 import yaml
 from koreaInvestmentApi.Crawlings import Crawlings
+from koreaInvestmentApi.LoggingHandler import LoggingHandler
 from koreaInvestmentApi.Quotes import Quotes
 from koreaInvestmentApi.TokenManagement import TokenManagement
 from koreaInvestmentApi.Trading import Trading
-from koreaInvestmentApi.LoggingHandler import LoggingHandler
+
 logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:

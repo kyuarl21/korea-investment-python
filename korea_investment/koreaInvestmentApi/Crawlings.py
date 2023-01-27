@@ -1,7 +1,4 @@
-import datetime
-import json
 import requests
-import time
 import yaml
 
 with open('config.yaml', encoding='UTF-8') as f:

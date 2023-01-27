@@ -1,8 +1,8 @@
-import json
 import requests
 import yaml
 from koreaInvestmentApi.Headers import Headers
 from koreaInvestmentApi.LoggingHandler import LoggingHandler
+
 logger = LoggingHandler.setLogger()
 
 with open('config.yaml', encoding='UTF-8') as f:

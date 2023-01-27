@@ -1,6 +1,6 @@
 from apscheduler.schedulers.background import BlockingScheduler
 from django.conf import settings
-from django_apscheduler.jobstores import register_events, DjangoJobStore
+from django_apscheduler.jobstores import register_events
 from koreaInvestmentApi.DomesticMonitoring import DomesticMonitoring
 from koreaInvestmentApi.OverseasMonitoring import OverseasMonitoring
 from koreaInvestmentApi.SymbolsCreator import SymbolsCreator
@@ -9,7 +9,6 @@ class Operator:
     
     def start(self):
         scheduler = BlockingScheduler(timezone=settings.TIME_ZONE)
-        # scheduler.add_job(DjangoJobStore(), 'djangojobstore')
         register_events(scheduler)
         
         @scheduler.scheduled_job('cron', hour=9, name = 'monitoringKospiStocks')
@@ -31,5 +30,5 @@ class Operator:
         @scheduler.scheduled_job('cron', hour=2, name = 'monitoringAmexStocks')
         def monitoringAmexStocks():
             OverseasMonitoring.monitoringAmexStocks(self, SymbolsCreator.createAmexSymbols())
-        
+            
         scheduler.start()
