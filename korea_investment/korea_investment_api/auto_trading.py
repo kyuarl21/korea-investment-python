@@ -1,11 +1,11 @@
 import yaml
-from koreaInvestmentApi.Crawlings import Crawlings
-from koreaInvestmentApi.LoggingHandler import LoggingHandler
-from koreaInvestmentApi.Quotes import Quotes
-from koreaInvestmentApi.TokenManagement import TokenManagement
-from koreaInvestmentApi.Trading import Trading
+from korea_investment_api.crawlings import Crawlings
+from korea_investment_api.logging_handler import LoggingHandler
+from korea_investment_api.quotes import Quotes
+from korea_investment_api.token_management import TokenManagement
+from korea_investment_api.trading import Trading
 
-logger = LoggingHandler.setLogger()
+logger = LoggingHandler.set_logger()
 
 with open('config.yaml', encoding='UTF-8') as f:
     _cfg = yaml.load(f, Loader=yaml.FullLoader)
@@ -21,14 +21,14 @@ class AutoTrading:
     def __init__(self):
         self = self
         
-    def autoTradingDomesticStocks(self):
-        ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
+    def auto_trading_domestic_stocks(self):
+        ACCESS_TOKEN = TokenManagement.issue_korea_investment_token()
         response_array = []
         kospiSymbols = ["005930", "035420", "035720"]
         for symbol in kospiSymbols:
-            #present_response = Quotes.getDomesticStockPrice(self, ACCESS_TOKEN, symbol)
+            #present_response = Quotes.get_domestic_stock_price(self, ACCESS_TOKEN, symbol)
             #time.sleep(1)
-            daily_response = Quotes.getDomesticStockDailyPrices(self, ACCESS_TOKEN, symbol)
+            daily_response = Quotes.get_domestic_stock_daily_prices(self, ACCESS_TOKEN, symbol)
             #time.sleep(1)
         
             up_sum = 0; down_sum = 0
@@ -47,7 +47,7 @@ class AutoTrading:
             #target2 = (up_average / down_average) / ((up_average / down_average) + 1) * 100
             print(target)
             
-            available_response = Trading.getDomesticAvailableBalance(self, ACCESS_TOKEN, symbol)
+            available_response = Trading.get_domestic_available_balance(self, ACCESS_TOKEN, symbol)
             #print(available_response)
             available_cash = available_response['output']['ord_psbl_cash']
             #print(available_cash)
@@ -55,25 +55,25 @@ class AutoTrading:
             order_response = ""
             quantity = 100
             if (float(target) <= float(30)):
-                order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0802U", symbol, quantity)
+                order_response = Trading.order_domestic_stock(self, ACCESS_TOKEN, "VTTC0802U", symbol, quantity)
             elif (float(target) >= float(70)):
-                order_response = Trading.orderDomesticStock(self, ACCESS_TOKEN, "VTTC0801U", symbol, quantity)
+                order_response = Trading.order_domestic_stock(self, ACCESS_TOKEN, "VTTC0801U", symbol, quantity)
             
             response_array.append(order_response)
         
         logger.debug(response_array)
         return response_array
     
-    def autoTradingOverseasStocks(self):
-        ACCESS_TOKEN = TokenManagement.issueKoreaInvestmentToken()
+    def auto_trading_overseas_stocks(self):
+        ACCESS_TOKEN = TokenManagement.issue_korea_investment_token()
         response_array = []
         excd = "NAS"
         excg = "NASD"
         nasdaqSymbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "TSLA", "PEP", "AVGO", "AZN", "COST", "CSCO", "TMUS", "CMCSA", "TXN", "ADBE", "AMGN", "HON", "NFLX", "QCOM", "SNY", "PDD", "INTC", "INTU", "AMD", "GILD", "JD", "ADP", "ISRG", "MDLZ", "AMAT", "PYPL", "REGN"]
         for symbol in nasdaqSymbols:
-            present_response = Quotes.getOverseasStockPrice(self, ACCESS_TOKEN, excd, symbol)
+            present_response = Quotes.get_overseas_stock_price(self, ACCESS_TOKEN, excd, symbol)
             #time.sleep(1)
-            daily_response = Quotes.getOverseasStockDailyPrices(self, ACCESS_TOKEN, excd, symbol)
+            daily_response = Quotes.get_overseas_stock_daily_prices(self, ACCESS_TOKEN, excd, symbol)
             #print(daily_response)
             if (daily_response['output1']['nrec'] == ""):
                 continue
@@ -103,9 +103,9 @@ class AutoTrading:
             order_response = ""
             quantity = 100
             if (float(target) <= float(30)):
-                order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1002U", excg, symbol, quantity)
+                order_response = Trading.order_overseas_stock(self, ACCESS_TOKEN, "VTTT1002U", excg, symbol, quantity)
             elif (float(target) >= float(70)):
-                order_response = Trading.orderOverseasStock(self, ACCESS_TOKEN, "VTTT1001U", excg, symbol, quantity)
+                order_response = Trading.order_overseas_stock(self, ACCESS_TOKEN, "VTTT1001U", excg, symbol, quantity)
                 
             response_array.append(order_response)
         

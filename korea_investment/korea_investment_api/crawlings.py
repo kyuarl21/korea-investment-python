@@ -9,13 +9,13 @@ WOWTV_BASE_URL = _cfg['WOWTV_BASE_URL']
 
 class Crawlings:
         
-    def crawlingStockPlus():
+    def crawling_stock_plus():
         url = STOCK_PLUS_BASE_URL
         response = requests.get(url)
         #print(response)
         return response.text
 
-    def crawlingWowTV():
+    def crawling_wow_tv():
         url = WOWTV_BASE_URL
         response = requests.get(url)
         #print(response)

@@ -1,9 +1,9 @@
 import requests
 import yaml
-from koreaInvestmentApi.Headers import Headers
-from koreaInvestmentApi.LoggingHandler import LoggingHandler
+from korea_investment_api.common_headers import CommonHeaders
+from korea_investment_api.logging_handler import LoggingHandler
 
-logger = LoggingHandler.setLogger()
+logger = LoggingHandler.set_logger()
 
 with open('config.yaml', encoding='UTF-8') as f:
     _cfg = yaml.load(f, Loader=yaml.FullLoader)
@@ -18,7 +18,7 @@ class Holdings:
     def __init__(self, token):
         self.token = token
     
-    def getDomesticStocksBalance(self, token):
+    def get_domestic_stocks_balance(self, token):
         """ 국내 주식 잔고조회 """
         url = KOREA_INVESTMENT_BASE_URL + "/uapi/domestic-stock/v1/trading/inquire-balance"
         params = {
@@ -34,12 +34,12 @@ class Holdings:
             "CTX_AREA_FK100": "",
             "CTX_AREA_NK100": ""
         }
-        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "VTTC8434R"), params = params)
+        response = requests.get(url, headers = CommonHeaders.create_korea_investment_headers(self, token, "VTTC8434R"), params = params)
         logger.debug(response.json())
         #cash = response.json()['output']['ord_psbl_cash']
         return response.json()
     
-    def getOverseasStocksBalance(self, token):
+    def get_overseas_stocks_balance(self, token):
         """ 해외 주식 잔고조회 """
         """※ PSBL_YN(주야간 원장 구분) 값으로 tr_id 구분해서 API 호출
             - 해외주식주문 > 해외주식 주야간원장구분조회 API문서 참조
@@ -61,7 +61,7 @@ class Holdings:
             "CTX_AREA_FK200	": "",
             "CTX_AREA_NK200": ""
         }
-        response = requests.get(url, headers = Headers.createKoreaInvestmentHeaders(self, token, "VTTT3012R"), params = params)
+        response = requests.get(url, headers = CommonHeaders.create_korea_investment_headers(self, token, "VTTT3012R"), params = params)
         logger.debug(response.json())
         #cash = response.json()['output']['ord_psbl_cash']
         return response.json()

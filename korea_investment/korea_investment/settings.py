@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--g0x!i+wgai(**o-mf6%(gru+1a^=xe_g%%)%sc_+$!%&@$cf9'
+SECRET_KEY = 'django-insecure-=#z%zof6c@89_iy^9hs4-pwh(femufaqcpjh#*rw++od3s0785'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_apscheduler',
     'rest_framework',
-    'koreaInvestmentApi.apps.KoreaInvestmentApiConfig'
+    'korea_investment_api.apps.KoreaInvestmentApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -112,7 +112,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

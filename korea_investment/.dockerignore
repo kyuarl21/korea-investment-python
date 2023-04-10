@@ -1,0 +1,10 @@
+.idea
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+*.md
+*.sh
+*.yml
+scripts

@@ -1,7 +1,7 @@
 
 class SymbolsCreator:
     
-    def createKospiSymbols():
+    def create_kospi_symbols():
         kospiSymbols = []
         kospiSymbols.append("005930"); kospiSymbols.append("373220"); kospiSymbols.append("207940"); kospiSymbols.append("000660")
         kospiSymbols.append("006400"); kospiSymbols.append("051910"); kospiSymbols.append("005380"); kospiSymbols.append("035420")
@@ -31,7 +31,7 @@ class SymbolsCreator:
         
         return kospiSymbols
     
-    def createKosdaqSymbols():
+    def create_kosdaq_symbols():
         kosdaqSymbols = []
         kosdaqSymbols.append("091990"); kosdaqSymbols.append("247540"); kosdaqSymbols.append("066970"); kosdaqSymbols.append("293490")
         kosdaqSymbols.append("028300"); kosdaqSymbols.append("086520"); kosdaqSymbols.append("263750"); kosdaqSymbols.append("253450")
@@ -61,7 +61,7 @@ class SymbolsCreator:
         
         return kosdaqSymbols
         
-    def createNasdaqSymbols():
+    def create_nasdaq_symbols():
         nasdaqSymbols = []
         nasdaqSymbols.append("APPL"); nasdaqSymbols.append("MSFT"); nasdaqSymbols.append("GOOGL"); nasdaqSymbols.append("AMZN")
         nasdaqSymbols.append("TSLA"); nasdaqSymbols.append("NVDA"); nasdaqSymbols.append("META"); nasdaqSymbols.append("PEP")
@@ -91,7 +91,7 @@ class SymbolsCreator:
         
         return nasdaqSymbols
     
-    def createNewYorkSymbols():
+    def create_new_york_symbols():
         newYorkSymbols = []
         newYorkSymbols.append("BRK/B"); newYorkSymbols.append("UNH"); newYorkSymbols.append("JNJ"); newYorkSymbols.append("V")
         newYorkSymbols.append("XOM"); newYorkSymbols.append("TSM"); newYorkSymbols.append("WMT"); newYorkSymbols.append("JPM")
@@ -121,7 +121,7 @@ class SymbolsCreator:
         
         return newYorkSymbols
     
-    def createAmexSymbols():
+    def create_amex_symbols():
         amexSymbols = []
         amexSymbols.append("LNG"); amexSymbols.append("CQP"); amexSymbols.append("IMO"); amexSymbols.append("SIM")
         amexSymbols.append("SEB"); amexSymbols.append("BTG"); amexSymbols.append("GSAT"); amexSymbols.append("PRK")

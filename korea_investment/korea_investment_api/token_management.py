@@ -11,7 +11,7 @@ KOREA_INVESTMENT_APP_SECRET = _cfg['KOREA_INVESTMENT_APP_SECRET']
 
 class TokenManagement:
     
-    def issueKoreaInvestmentToken():
+    def issue_korea_investment_token():
         """ 한국투자증권 토큰 발급 """
         url = KOREA_INVESTMENT_BASE_URL + "/oauth2/tokenP"
         headers = {"content-type": "application/json"}

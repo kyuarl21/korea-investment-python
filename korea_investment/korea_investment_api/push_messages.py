@@ -12,7 +12,7 @@ class PushMessages:
         self.token = token
         self.text = text
     
-    def kakao_push_messages(token, text):
+    def push_kakao_messages(token, text):
         """ Push kakao messages """
         url = KAKAO_BASE_URI + "/v2/api/talk/memo/default/send"
         headers = {

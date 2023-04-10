@@ -7,12 +7,12 @@ KOREA_INVESTMENT_BASE_URL = _cfg['KOREA_INVESTMENT_BASE_URL']
 KOREA_INVESTMENT_APP_KEY = _cfg['KOREA_INVESTMENT_APP_KEY']
 KOREA_INVESTMENT_APP_SECRET = _cfg['KOREA_INVESTMENT_APP_SECRET']
 
-class Headers:
+class CommonHeaders:
     def __init__(self, token, trId):
         self.token = token
         self.trId = trId
 
-    def createKoreaInvestmentHeaders(self, token, trId):
+    def create_korea_investment_headers(self, token, trId):
         headers = {"content-type": "application/json; charset=utf-8",
             "authorization": "Bearer " + token,
             "appKey": KOREA_INVESTMENT_APP_KEY,
