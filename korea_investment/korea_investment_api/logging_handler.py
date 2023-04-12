@@ -2,7 +2,6 @@ import logging
 
 
 class LoggingHandler:
-
     def set_logger():
         # 1 logger instance를 만듭니다.
         logger = logging.getLogger()
@@ -16,7 +15,8 @@ class LoggingHandler:
         # funcName - log가 기록된 함수
         # lineno - log가 기록된 line
         formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s - [%(funcName)s:%(lineno)d] - %(message)s")
+            "%(asctime)s - %(levelname)s - [%(funcName)s:%(lineno)d] - %(message)s"
+        )
 
         # 4 handler instance 생성하여 console 및 파일로 저장할 수 있도록 합니다. 파일명은 txt도 됩니다.
         console = logging.StreamHandler()
