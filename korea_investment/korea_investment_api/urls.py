@@ -27,4 +27,9 @@ urlpatterns = [
         Views.monitoring_amex_stocks,
         name="korea_investment_api",
     ),
+    path(
+        "v1/learning-model",
+        Views.learning_model,
+        name="korea_investment_api",
+    ),
 ]
